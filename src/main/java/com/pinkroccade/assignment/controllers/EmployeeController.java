@@ -1,22 +1,47 @@
 package com.pinkroccade.assignment.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.pinkroccade.assignment.entities.Employee;
+import com.pinkroccade.assignment.repository.EmployeeRepository;
 import com.pinkroccade.assignment.services.EmployeeService;
 
-@Controller
+@RestController
 public class EmployeeController {
 	
 	@Autowired
-	private EmployeeService employeeService;
+	private EmployeeService employeeService;	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
-    @PostMapping("/save")
-    public void saveEmployee(@RequestBody String name) {
-    	Employee employee = new Employee(name);
-    	employeeService.saveEmployee(employee);
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@RequestBody Employee employee) {
+    	if (employee.getName() == null || "".equals(employee.getName().trim())) {
+    		return "Name of employee may not be empty.";
+    	} 
+    	return employeeService.saveEmployee(employee);
+    }
+    
+    @PostMapping("/updateEmployee")
+    public String updateEmployee(@RequestBody Employee employee) {
+    	return employeeService.updateEmployee(employee);
+    }
+    
+    @PostMapping("/deleteEmployee")
+    public String deleteEmployee(@RequestBody Employee employee) {
+    	return employeeService.deleteEmployee(employee);
+    }
+    
+    @GetMapping("/getEmployees")
+    public List<Employee> getEmployees() {
+    	List<Employee> employeeList = (List<Employee>) employeeRepository.findAll();
+    	
+    	return employeeList;
     }
 }

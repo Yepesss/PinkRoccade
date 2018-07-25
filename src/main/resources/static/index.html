@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="js/employee.js"></script>
 <meta charset="UTF-8">
 <title>Employee</title>
+<script type="text/javascript" src="/js/employee.js"></script>
 </head>
 <body>
 <h1>Employees</h1>
 
 <input type="text" placeholder="Name" id="name"/>
+<input type="checkbox" onclick="show()" id="checkbox"/> I have a partner<br>
+<input type="text" placeholder="Name of partner" style="display:none" id="partnerInput"/>
 
-<button onclick="save()">Insert employee</button>
-<button>Update employee</button>
-<button>Delete employee</button>
+<button onclick="saveEmployee()">Insert employee</button>
+
+<br>
+
+<button onclick="showAllEmployees()" id="list">Refresh employees</button>
+
+<div>
+<table id="tableId"></table></div>
 
 </body>
 </html>
