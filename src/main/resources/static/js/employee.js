@@ -79,7 +79,7 @@ function showAllEmployees() {
 	xhttp.setRequestHeader("Content-type", "application/json");
 	xhttp.send();
 	
-
+	//Create a dynamic table of all the employees
 	var div = document.getElementById("tableId");
 	
 	if (employees.length == 0) {
@@ -90,8 +90,6 @@ function showAllEmployees() {
 			div.innerHTML += "<tr><td>" + employees[i].id + "</td>" +
 			"<td>" + employees[i].name + "</td>" +
 			"<td>" + employees[i].partner + "</td>" +
-			"<td><input type=\"text\" placeholder=\"New name:\"/></td>" +
-			"<td><button onclick=\"updateEmployee("+employees[i].id+")\">Update employee</button></td>" +
 			"<td><button onclick=\"deleteEmployee("+employees[i].id+")\">Delete employee</button></td></tr>";
 		}
 	}

@@ -22,26 +22,31 @@ public class EmployeeController {
 
     @PostMapping("/saveEmployee")
     public String saveEmployee(@RequestBody Employee employee) {
+    	
+    	//Check if the name input is empty and return without creating.
     	if (employee.getName() == null || "".equals(employee.getName().trim())) {
     		return "Name of employee may not be empty.";
-    	} 
-    	return employeeService.saveEmployee(employee);
-    }
-    
-    @PostMapping("/updateEmployee")
-    public String updateEmployee(@RequestBody Employee employee) {
-    	return employeeService.updateEmployee(employee);
+    	}
+    	
+    	//Create the employee
+    	Employee newEmployee = new Employee(employee.getName());
+    	
+    	//Save the employee
+    	return employeeService.saveEmployee(newEmployee);
     }
     
     @PostMapping("/deleteEmployee")
     public String deleteEmployee(@RequestBody Employee employee) {
+    	//delete the employee
     	return employeeService.deleteEmployee(employee);
     }
     
     @GetMapping("/getEmployees")
     public List<Employee> getEmployees() {
+    	//Get a list of all the employees that exists in the database
     	List<Employee> employeeList = (List<Employee>) employeeRepository.findAll();
     	
+    	//Return that list
     	return employeeList;
     }
 }

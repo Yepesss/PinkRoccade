@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Employee {
 	
+	//Create table Employee in the database
 	@Id
 	@GeneratedValue
 	private Long id;
